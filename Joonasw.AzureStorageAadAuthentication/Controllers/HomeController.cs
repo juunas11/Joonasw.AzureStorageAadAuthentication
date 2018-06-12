@@ -47,7 +47,6 @@ namespace Joonasw.AzureStorageAadAuthentication.Controllers
 
         private async Task<string> AcquireAccessTokenAsync()
         {
-            // TODO: Add in-memory cache for token, MSI endpoint cannot be called too many times per second
             var tokenProvider = new AzureServiceTokenProvider();
             return await tokenProvider.GetAccessTokenAsync("https://storage.azure.com/", _tenantId);
         }

@@ -9,7 +9,6 @@ using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Microsoft.Azure.Services.AppAuthentication;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.IdentityModel.Clients.ActiveDirectory;
 
 namespace Joonasw.AzureStorageAadAuthentication.Controllers
 {

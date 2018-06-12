@@ -1,5 +1,3 @@
-using System;
-
 namespace Joonasw.AzureStorageAadAuthentication.Models
 {
     public class ErrorViewModel

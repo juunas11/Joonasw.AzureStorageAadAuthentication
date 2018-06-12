@@ -19,8 +19,6 @@ namespace Joonasw.AzureStorageAadAuthentication.Controllers
         private readonly string _containerName;
         private readonly string _fileName;
         private readonly string _tenantId;
-        private readonly string _clientId;
-        private readonly string _clientSecret;
         private readonly IHostingEnvironment _environment;
 
         public HomeController(IConfiguration configuration, IHostingEnvironment environment)
@@ -29,8 +27,6 @@ namespace Joonasw.AzureStorageAadAuthentication.Controllers
             _containerName = configuration["Storage:Container"];
             _fileName = configuration["Storage:File"];
             _tenantId = configuration["Authentication:TenantId"];
-            _clientId = configuration["Authentication:ClientId"];
-            _clientSecret = configuration["Authentication:ClientSecret"];
             _environment = environment;
         }
 
@@ -52,15 +48,6 @@ namespace Joonasw.AzureStorageAadAuthentication.Controllers
 
         private async Task<string> AcquireAccessTokenAsync()
         {
-            if (_environment.IsDevelopment())
-            {
-                var context = new AuthenticationContext($"https://login.microsoftonline.com/{_tenantId}");
-                var result = await context.AcquireTokenAsync(
-                    "https://storage.azure.com/",
-                    new ClientCredential(_clientId, _clientSecret));
-                return result.AccessToken;
-            }
-
             var tokenProvider = new AzureServiceTokenProvider();
             return await tokenProvider.GetAccessTokenAsync("https://storage.azure.com/", _tenantId);
         }
